@@ -18,4 +18,3 @@ ADD https://github.com/FFIG/ffig/archive/master.zip /home/ffig/ffig
 COPY . /home/ffig/rest-api
 WORKDIR /home/ffig/flask
 EXPOSE 5000
-RUN python ./run.py
