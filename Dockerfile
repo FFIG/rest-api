@@ -16,3 +16,5 @@ ADD https://github.com/FFIG/ffig/archive/master.zip /home/ffig/ffig
 
 # Copy in the content of this repository
 COPY . /home/ffig/rest-api
+WORKDIR /home/ffig/flask
+EXPOSE 5000
