@@ -3,7 +3,7 @@
 # dependencies required for a flask web application
 
 # Start with ffig-base image
-FROM ffig-org/ffig-base
+FROM ffig/ffig-base
 MAINTAINER support@ffig.org
 
 # Install flask
