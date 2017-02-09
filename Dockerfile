@@ -12,7 +12,7 @@ RUN pip3 install --upgrade pip && pip install flask
 
 # Install the ffig codebase
 WORKDIR /home/ffig
-ADD https://github.com/FFIG/ffig-base/archive/master.zip /home/ffig/ffig
+ADD https://github.com/FFIG/ffig/archive/master.zip /home/ffig/ffig
 
 # Copy in the content of this repository
 COPY . /home/ffig/rest-api
