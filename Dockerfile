@@ -19,7 +19,7 @@ RUN cd /home/ffig && \
     rm -f ffig-master.zip
 
 # Copy in the content of this repository
-COPY . /home/ffig/rest-api
+COPY . /home/ffig/flask
 
 WORKDIR /home/ffig/flask
 
