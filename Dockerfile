@@ -7,14 +7,21 @@ FROM ffig/ffig-base
 MAINTAINER support@ffig.org
 
 # Install flask
-RUN pip install --upgrade pip && pip install flask
-RUN pip3 install --upgrade pip && pip install flask
+RUN pip install --upgrade pip && \
+    pip install flask && \
+    pip3 install --upgrade pip && \
+    pip3 install flask
 
-# Install the ffig codebase
-WORKDIR /home/ffig
-ADD https://github.com/FFIG/ffig/archive/master.zip /home/ffig/ffig
+# Install the ffig codebase. Use `cd` here to avoid several WORKDIR layers.
+RUN cd /home/ffig && \
+    curl -O https://github.com/FFIG/ffig/archive/master.zip && \
+    unzip ffig-master.zip && \
+    rm -f ffig-master.zip
 
 # Copy in the content of this repository
 COPY . /home/ffig/rest-api
+
 WORKDIR /home/ffig/flask
+
+# Default flask port
 EXPOSE 5000
