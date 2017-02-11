@@ -13,9 +13,10 @@ RUN pip install --upgrade pip && \
     pip3 install flask
 
 # Install the ffig codebase. Use `cd` here to avoid several WORKDIR layers.
-ADD https://github.com/FFIG/ffig/archive/master.zip /home/
-RUN unzip home/master.zip -d home/ && \
-    rm -f home/master.zip
+RUN cd /home/ffig && \
+    curl -O https://github.com/FFIG/ffig/archive/master.zip && \
+    unzip ffig-master.zip && \
+    rm -f ffig-master.zip
 
 # Copy in the content of this repository
 COPY . /home/flask/
