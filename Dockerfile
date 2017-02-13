@@ -7,16 +7,16 @@ FROM ffig/ffig-base
 MAINTAINER support@ffig.org
 
 # Install flask
-RUN pip install --upgrade pip && \
+RUN pip2 install --upgrade pip && \
     pip2 install flask && \
     pip3 install --upgrade pip && \
     pip3 install flask
 
 # Install the ffig codebase. Use `cd` here to avoid several WORKDIR layers.
-RUN cd /home/ffig && \
-    curl -O https://github.com/FFIG/ffig/archive/master.zip && \
-    unzip ffig-master.zip && \
-    rm -f ffig-master.zip
+RUN cd /home && \
+    curl -LOk https://github.com/FFIG/ffig/archive/master.zip && \
+    unzip master.zip && \
+    rm -f master.zip
 
 # Copy in the content of this repository
 COPY . /home/flask/
