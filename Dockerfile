@@ -16,10 +16,12 @@ RUN pip2 install --upgrade pip && \
 RUN cd /home && \
     curl -LOk https://github.com/FFIG/ffig/archive/master.zip && \
     unzip master.zip && \
-    rm -f master.zip
+    rm -rf home/ffig/ && \
+    rm -f master.zip && \
+    touch __init__.py ffig/__init__.py
 
 # Copy in the content of this repository
 COPY . /home/flask/
 
 WORKDIR /home/flask/
-
+CMD ["python", "ffig_explorer.py"]
