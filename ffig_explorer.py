@@ -11,18 +11,18 @@ app = Flask(__name__, template_folder=".")
 
 
 class Args:
-    """ Class, which creates a duckly-typed Object 
+    """ Class, which creates a duckly-typed Object
     with same attributes as normal FFIG argparser"""
 
     def __init__(self, path_to_source, module_name,
-                 bindings, output_dir='output/', template_dir=None):
-
+                 bindings, output_dir='output', template_dir=None):
+        cur_dir = os.path.dirname(__file__)
         self.inputs = [os.path.abspath(path_to_source)]
         self.module_name = module_name
         self.bindings = list(bindings)
         if template_dir == None:
-            self.template_dir = os.path.abspath(
-                os.path.join(ffig_folder, 'templates'))
+            self.template_dir = os.path.join(ffig_subfolder, 'templates')
+        self.output_dir = os.path.join(cur_dir, output_dir)
 
     def __repr__(self):
         return "Args. module_name: {}, bindings: {}, template_dir: {}, inputs: {}".format(self.module_name, self.bindings, self.template_dir, self.inputs)
@@ -38,16 +38,17 @@ def gen_bindings_from_tu():
     mod_name = request.form['module_name']
     inp_file = request.form['inp_file']
 
-    path_to_source = os.path.join(os.path.dir(__file__), 'test_write_file')
+    path_to_source = os.path.abspath(os.path.join(
+        os.path.dirname(__file__), 'test_write_file'))
+    #print(os.path.dirname(__file__), path_to_source)
     with open(path_to_source, 'w') as f:
         f.write(request.form['inp_file'])
 
-    # args = Args(os.path.abspath(path_to_source), mod_name, ["python"])
-    # print(args)
-    # print("\n\n\n\n\tWe have {} inputs".format(len(args.inputs)))
-    # FFIG.main(args)
-
-    #f = json.load(os.path.join(Args.output_dir))
+    print(os.path.abspath(path_to_source))
+    args = Args(path_to_source, mod_name, ["python"])
+    print(args)
+    FFIG.main(args)
+    # f = json.load(os.path.join(Args.output_dir))
     # process the in the response
     return jsonify(status=200, module_name=mod_name, inp_file=inp_file)
 
