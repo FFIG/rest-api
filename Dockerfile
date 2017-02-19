@@ -14,11 +14,14 @@ RUN pip2 install --upgrade pip && \
 
 # Install the ffig codebase. Use `cd` here to avoid several WORKDIR layers.
 RUN cd /home && \
+    # clone and init the git submodules
     git clone -b master --recurse-submodules https://github.com/FFIG/ffig.git && \
-    touch __init__.py ffig/__init__.py
+    touch ffig/__init__.py
+
+ENV PYTHONPATH $PYTHONPATH:/home/ffig/ffig/
 
 # Copy in the content of this repository
 COPY . /home/flask/
 WORKDIR /home/flask/
 
-CMD ["python", "ffig_explorer.py"]
+#CMD ["python", "ffig_explorer.py"]
