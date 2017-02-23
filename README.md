@@ -8,3 +8,5 @@ To build and run the docker image, run
 docker build -t ffig/web-base:latest .
 docker run -p 5000:5000 -it ffig/web-base:latest /bin/bash
 ```
+
+requests_at_explorer.py is a python requests script with a sample request that you can send against port 5000 locally. 
