@@ -1,26 +1,23 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 
 import requests
 
-source = """#ifdef __clang__
-#define C_API __attribute__((annotate("GENERATE_C_API")))
-#else
-#define C_API
-#endif
+source = """
+#include "ffig/attributes.h"
 
-struct Asset
+struct FFIG_EXPORT Asset
 {
-  virtual double PV() const = 0;
-  virtual const char* name() const = 0;
+  virtual FFIG_EXPORT_NAME(value) double PV() const = 0;
+  virtual FFIG_PROPERTY_NAME(name) const char* id() const = 0;
   virtual ~Asset() = default;
-} C_API;
+};
 
-struct CDO : Asset
+struct FFIG_NAME(CDO) CollateralisedDebtObligation : Asset
 {
-  CDO() {}
+  CollateralisedDebtObligation() {}
 
-  double PV() const override { return 0.0; }
-  const char* name() const override { return "CDO"; }
+  double PV() const override { return 99.99; }
+  const char* id() const override { return "CDO"; }
 };
 """
 
@@ -28,4 +25,7 @@ payload = {'module_name': "test", 'inp_file': source}
 
 r = requests.post(
     "http://127.0.0.1:5000/api/gen_bindings_from_tu", data=payload)
-print(r.text)
+if r.status_code == 200:
+    print(r.text)
+else:
+    print("Request failed")
