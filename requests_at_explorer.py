@@ -25,7 +25,7 @@ payload = {'module_name': "test", 'inp_file': source}
 
 r = requests.post(
     "http://127.0.0.1:5000/api/gen_bindings_from_tu", data=payload)
-if r.status_code == 200:
+if r.status_code == requests.codes.ok:
     print(r.text)
 else:
     print("Request failed")

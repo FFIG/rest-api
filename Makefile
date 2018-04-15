@@ -1,9 +1,11 @@
-build:
+.docker-build: Dockerfile
 	docker build -t ffig/web-base:latest .
+	touch .docker-build
+
+build: .docker-build
 
 run: build
 	docker run -p 5000:5000 -it ffig/web-base:latest
-
 
 clean:
 	docker kill $$(docker ps -q -f ancestor=ffig/web-base)
