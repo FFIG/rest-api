@@ -21,11 +21,14 @@ struct FFIG_NAME(CDO) CollateralisedDebtObligation : Asset
 };
 """
 
-payload = {'module_name': "test", 'inp_file': source}
+payload = {'module_name': "test", 'inp_file': source,
+           "bindings_to_generate": ["py3"]}
 
 r = requests.post(
     "http://127.0.0.1:5000/api/gen_bindings_from_tu", data=payload)
 if r.status_code == requests.codes.ok:
-    print(r.text)
+    json_resp = r.json()
+    print(json_resp['res'])
+
 else:
     print("Request failed")

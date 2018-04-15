@@ -28,6 +28,7 @@ def gen_bindings_from_tu():
     """
     mod_name = request.form['module_name']
     inp_file = request.form['inp_file']
+    bindings_requested = request.form["bindings_to_generate"]
 
     # local re-write/copy of ffig functionality
     ffig_subfolder = '/home/ffig/ffig/'
@@ -37,15 +38,15 @@ def gen_bindings_from_tu():
 
     template = env.get_template("py3.tmpl")
 
-    m = ffig.FFIG.build_model_from_source(inp_file, mod_name)
+    m = ffig.FFIG.build_model_from_source(
+        "filename.hpp", mod_name, [("filename.hpp", inp_file)])
     classes = m.classes
     api_classes = ffig.FFIG.collect_api_and_obj_classes(classes, 'FFIG:EXPORT')
     output_string = ffig.generators.render_api_and_obj_classes(
         mod_name, api_classes, template)
-
     return jsonify(status=200,
                    module_name=mod_name,
-                   inp_file=inp_file)
+                   res=output_string)
 
 
 if __name__ == '__main__':
