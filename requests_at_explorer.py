@@ -4,7 +4,8 @@ import difflib
 import requests
 
 with open("expected_binding.py") as f:
-    expected_binding = f.readlines()
+    # remove \n from end of each line
+    expected_binding = [line.rstrip() for line in f]
 
 
 source = """
@@ -34,6 +35,7 @@ r = requests.post(
 if r.status_code == requests.codes.ok:
     json_resp = r.json()
     d = difflib.Differ()
-    res = list(d.compare(json_resp['res'].splitlines(), expected_binding))
-    pprint.pprint(res)
-    # assert json_resp['res'] == expected_binding
+    binding_from_api = json_resp['res'].splitlines()
+    res = list(d.compare(binding_from_api, expected_binding))
+    for l in res:
+        assert l[0] == " "
