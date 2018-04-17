@@ -32,10 +32,14 @@ payload = {'module_name': "test", 'inp_file': source,
 
 r = requests.post(
     "http://127.0.0.1:5000/api/gen_bindings_from_tu", data=payload)
-if r.status_code == requests.codes.ok:
-    json_resp = r.json()
-    d = difflib.Differ()
-    binding_from_api = json_resp['res'].splitlines()
-    res = list(d.compare(binding_from_api, expected_binding))
-    for l in res:
-        assert l[0] == " "
+
+assert r.status_code == requests.codes.ok
+    
+json_resp = r.json()
+differ = difflib.Differ()
+binding_from_api = json_resp['res'].splitlines()
+res = list(differ.compare(binding_from_api, expected_binding))
+for line in res:
+    # Each line of a Differ delta begins with a two-letter code.
+    # '  '  represents a line common to both sequences.
+    assert line[0:2] == '  '
