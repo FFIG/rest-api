@@ -15,18 +15,21 @@ RUN pip2 install --upgrade pip && \
 # Install the ffig codebase. Use `cd` here to avoid several WORKDIR layers.
 # separate layer to use docker cache
 RUN cd /home && \
-    # clone and init the git submodules
-
     git clone -b master --recurse-submodules https://github.com/FFIG/ffig.git
+
+# work-around for docker build cache, which ends up using old code
+RUN cd /home/ffig && git pull origin master && cd ../
+
 
 # start a new layer to help Docker cache this step
 # make directories in ffig traversable
 RUN touch home/ffig/__init__.py home/ffig/ffig/templates/__init__.py
 
-ENV PYTHONPATH $PYTHONPATH:/home/ffig/ffig/
+ENV PYTHONPATH $PYTHONPATH:/home/ffig/
 
 # Copy in the content of this repository
 COPY . /home/flask/
 WORKDIR /home/flask/
 
-CMD ["python", "ffig_explorer.py"]
+
+CMD ["python3", "ffig_explorer.py"]

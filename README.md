@@ -5,6 +5,7 @@ Implemented as a flask-app inside a Docker container with port binding to host.
 To build and run the docker image, run
 
 ```
+docker pull ffig/ffig-base
 docker build -t ffig/web-base:latest .
 docker run -p 5000:5000 -it ffig/web-base:latest /bin/bash
 ```
