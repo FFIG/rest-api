@@ -26,4 +26,4 @@ ENV PYTHONPATH $PYTHONPATH:/home/ffig/
 COPY . /home/flask/
 WORKDIR /home/flask/
 
-CMD ["/bin/bash"]
+CMD ["python3", "test_ffig_explorer.py"]
