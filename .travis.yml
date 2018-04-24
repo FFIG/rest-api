@@ -1,0 +1,14 @@
+language: python
+
+matrix:
+  include:
+    - os: linux
+      sudo: required
+      services:
+        - docker
+      install:
+        - docker pull ffig/ffig-base
+        - docker build -t ffig/web-test -f ./Dockerfile.test .
+
+      script:
+        - docker run -it ffig/web-test
