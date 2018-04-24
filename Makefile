@@ -17,6 +17,10 @@ clean:
 devel: build
 	docker run -d -p 5000:5000 ffig/web-base:latest
 
+test: Dockerfile.test
+	docker build -t ffig/web-test -f ./Dockerfile.test .
+	docker run -it ffig/web-test
+
 # HACKY - only works with 1 running container
 # starts a shell inside the running container
 debug:

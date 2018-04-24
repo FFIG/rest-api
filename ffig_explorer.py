@@ -6,12 +6,11 @@ import pdb
 import json
 import shutil
 
+import ffig.FFIG
 
 """ Flask app that implements a basic front-end on the home page and a rest-api under the /api/ endpoints """
 
 app = Flask(__name__, template_folder=".")
-
-CUR_DIR = os.path.dirname(__file__)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -52,7 +51,7 @@ def gen_bindings_from_tu():
 if __name__ == '__main__':
     if os.path.exists('/.dockerenv'):
         # check that we are inside a container
-        import ffig.FFIG
+
         app.run(host='0.0.0.0', port=5000, debug=True)
     else:
         raise Exception("Build and run a container")
