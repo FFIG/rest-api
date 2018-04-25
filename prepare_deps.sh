@@ -6,8 +6,6 @@ git clone -b master --recurse-submodules https://github.com/FFIG/ffig.git ../ffi
 
 touch ../ffig/__init__.py ../ffig/ffig/templates/__init__.py
 
-ls -al ../
+ls -al ../ffig
 
-cd -
-
-export PYTHONPATH="${PYTHONPATH}:../ffig/"
+export PYTHONPATH="${PYTHONPATH}:../ffig/ffig/"
