@@ -30,7 +30,7 @@ def gen_bindings_from_tu():
     bindings_requested = request.form["bindings_to_generate"]
 
     # local re-write/copy of ffig functionality
-    ffig_subfolder = '/home/ffig/ffig/'
+    ffig_subfolder = '../ffig/ffig/'
     template_dir = os.path.join(ffig_subfolder, 'templates')
 
     env = ffig.FFIG.set_template_env(template_dir)
