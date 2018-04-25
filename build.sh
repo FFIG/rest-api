@@ -1,9 +1,13 @@
 pip3 install --upgrade pip && pip3 install flask
 
-cd ../ && git clone -b master --recurse-submodules https://github.com/FFIG/ffig.git
+ls -al ../
 
-cd /ffig && git pull origin master && cd ../rest-api
+git clone -b master --recurse-submodules https://github.com/FFIG/ffig.git ../ffig
 
-touch home/ffig/__init__.py home/ffig/ffig/templates/__init__.py
+touch ../ffig/__init__.py ../ffig/templates/__init__.py
+
+ls -al ../
+
+cd -
 
 export PYTHONPATH="${PYTHONPATH}:/home/ffig/"
