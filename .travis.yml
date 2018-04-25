@@ -4,11 +4,9 @@ matrix:
   include:
     - os: linux
       sudo: required
-      services:
-        - docker
-      install:
-        - docker pull ffig/ffig-base
-        - docker build -t ffig/web-test -f ./Dockerfile.test .
 
+      install:
+        - ./build.sh
+        
       script:
-        - docker run -it ffig/web-test
+        - python3 test_ffig_explorer.py
