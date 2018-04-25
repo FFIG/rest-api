@@ -8,7 +8,7 @@ matrix:
       sudo: required
 
       install:
-        - bash ./build.sh
+        - bash ./prepare_deps.sh
         
       script:
         - python3 test_ffig_explorer.py
