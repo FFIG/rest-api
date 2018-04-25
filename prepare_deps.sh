@@ -8,5 +8,6 @@ touch ../ffig/__init__.py ../ffig/ffig/templates/__init__.py
 
 ls -al ../ffig
 
-PYTHONPATH="${PYTHONPATH}:../ffig/:../ffig/ffig/"
+export PYTHONPATH="${PYTHONPATH}:../ffig/:../ffig/ffig/"
+env | grep -i python
 
