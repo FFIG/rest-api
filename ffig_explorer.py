@@ -6,7 +6,13 @@ import pdb
 import json
 import shutil
 
-import ffig.FFIG
+try:
+    import ffig.FFIG
+except ModuleNotFoundError:
+    import sys
+    sys.path.insert(0, '/home/travis/build/FFIG/ffig')
+    import ffig.FFIG
+
 
 """ Flask app that implements a basic front-end on the home page and a rest-api under the /api/ endpoints """
 
