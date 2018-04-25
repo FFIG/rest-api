@@ -6,7 +6,7 @@ matrix:
       sudo: required
 
       install:
-        - ./build.sh
+        - bash ./build.sh
         
       script:
         - python3 test_ffig_explorer.py
