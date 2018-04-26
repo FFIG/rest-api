@@ -5,4 +5,4 @@ git clone -b master --recurse-submodules https://github.com/FFIG/ffig.git ../ffi
 touch ../ffig/__init__.py ../ffig/ffig/templates/__init__.py
 
 export PYTHONPATH="${PYTHONPATH}:../ffig/"
-export LD_LIBRARY_PATH=$(dirname $(find / -name libclang*.so))
+export LD_LIBRARY_PATH=$(llvm-config-5.0 --libdir)
