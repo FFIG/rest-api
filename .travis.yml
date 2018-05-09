@@ -14,7 +14,7 @@ matrix:
             - clang-5.0
 
       install:
-        - bash ./prepare_deps.sh
+        - ./prepare_deps.sh
         
       script:
         - python3 test_ffig_explorer.py
