@@ -2,6 +2,8 @@ import difflib
 import json
 import unittest
 
+import sys
+print(sys.path)
 
 import ffig_explorer
 

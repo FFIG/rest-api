@@ -6,7 +6,13 @@ import pdb
 import json
 import shutil
 
-import ffig.FFIG
+try:
+    import ffig.FFIG
+except ModuleNotFoundError:
+    import sys
+    sys.path.insert(0, '/home/travis/build/FFIG/ffig')
+    import ffig.FFIG
+
 
 """ Flask app that implements a basic front-end on the home page and a rest-api under the /api/ endpoints """
 
@@ -30,7 +36,7 @@ def gen_bindings_from_tu():
     bindings_requested = request.form["bindings_to_generate"]
 
     # local re-write/copy of ffig functionality
-    ffig_subfolder = '/home/ffig/ffig/'
+    ffig_subfolder = '../ffig/ffig/'
     template_dir = os.path.join(ffig_subfolder, 'templates')
 
     env = ffig.FFIG.set_template_env(template_dir)
